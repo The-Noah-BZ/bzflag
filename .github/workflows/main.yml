@@ -1,13 +1,18 @@
 name: Formatting
-on: [push]
+
+on: [push, pull_request]
+
 jobs:
   astyle:
     name: C++ astyle Lint
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
       - name: Install astyle
         run: sudo apt-get install astyle
+
       - name: Check formatting
         run: |
           astyle --style=allman -nxjQ --convert-tabs --max-code-length=120 --recursive './*.cxx' './*.cpp' './*.h'
